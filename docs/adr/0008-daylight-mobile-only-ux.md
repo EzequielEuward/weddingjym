@@ -1,0 +1,3 @@
+# Daylight High-Contrast Mobile-Only UX
+
+Because the wedding takes place during the day and guests will interact exclusively from their phones without a venue projector/TV screen, the UI is strictly Mobile-First and uses a high-contrast warm daylight theme rather than dark mode. Dark interfaces suffer from severe glare and poor legibility under natural daylight, whereas warm light surfaces with crisp dark typography and large thumb-reachable touch targets ensure effortless outdoor/daytime usability. Desktop and TV slideshow views are explicitly out of scope for the MVP; desktop browsers simply render the centered mobile viewport cleanly.

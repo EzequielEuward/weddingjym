@@ -1,0 +1,3 @@
+# Single-Event Architecture
+
+The application is architected strictly as a dedicated, single-event system for this specific wedding, rejecting a multi-tenant SaaS model. Multi-tenancy introduces premature complexity (organization management, event routing/slugs, tenant isolation, and tenant-level permissions) that is unnecessary for a private event and inflates infrastructure costs and development time. The codebase will remain modular and decoupled, allowing multi-tenancy abstraction in the future if desired, but all runtime models and data stores will operate under a single global event context.

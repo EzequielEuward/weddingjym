@@ -1,0 +1,52 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: wedding-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-wedding}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-wedding_local_pass}
+      POSTGRES_DB: ${POSTGRES_DB:-wedding}
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER:-wedding} -d $${POSTGRES_DB:-wedding}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: wedding-app
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "${PORT:-3000}:3000"
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      COOKIE_SECRET: ${COOKIE_SECRET:?Definí COOKIE_SECRET (mín. 32 caracteres) en .env}
+      QR_GATE_TOKEN: ${QR_GATE_TOKEN:?Definí QR_GATE_TOKEN en .env}
+      MODERATOR_PIN: ${MODERATOR_PIN:?Definí MODERATOR_PIN en .env}
+      DATABASE_URL: ${DOCKER_DATABASE_URL:-postgresql://${POSTGRES_USER:-wedding}:${POSTGRES_PASSWORD:-wedding_local_pass}@postgres:5432/${POSTGRES_DB:-wedding}}
+      STORAGE_DRIVER: ${STORAGE_DRIVER:-local}
+      LOCAL_STORAGE_PATH: /data/photos
+      SUPABASE_URL: ${SUPABASE_URL:-}
+      SUPABASE_SERVICE_ROLE_KEY: ${SUPABASE_SERVICE_ROLE_KEY:-}
+      SUPABASE_BUCKET: ${SUPABASE_BUCKET:-wedding-photos}
+    volumes:
+      - ./data/photos:/data/photos
+
+  # Opcional: se levanta con `docker compose --profile tunnel up -d` cuando tengas el token de Cloudflare Tunnel
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: wedding-cloudflared
+    restart: unless-stopped
+    profiles: ["tunnel"]
+    depends_on:
+      - app
+    command: tunnel --no-autoupdate run --token ${CLOUDFLARE_TUNNEL_TOKEN:-}

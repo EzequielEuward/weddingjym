@@ -1,0 +1,3 @@
+# Reactive Moderation and Lightweight Moderator Controls
+
+Photos uploaded by guests are published immediately to the live feed to preserve real-time engagement during the wedding party. Content moderation is reactive rather than preventative via an approval queue. Rather than building a separate, complex back-office administrative panel with multi-role RBAC, administrative powers are kept minimal and lightweight: a single moderator/organizer role accessed via a secret URL or PIN enables in-place moderation (hiding/deleting photos and controlling contest states directly within the web application).

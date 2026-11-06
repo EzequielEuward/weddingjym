@@ -1,0 +1,3 @@
+# Contest Voting Mechanics and Venue Wi-Fi NAT Protection
+
+Contest voting uses an approval/heart model allowing each guest session to cast at most one vote per Contest Entry (`UNIQUE(entry_id, guest_session_id)`), rather than restricting guests to a single vote across an entire category. Entries render in reverse-chronological order by default—with a toggle for the live Top Ranking—so late-night submissions are not buried by early uploads. Duplicate-vote prevention relies on a cryptographically signed `HttpOnly` guest session cookie rather than per-IP uniqueness, because shared venue Wi-Fi places dozens of guests behind the same public NAT IP; IP-based rules are strictly limited to high-threshold burst rate limiting against automated spam.

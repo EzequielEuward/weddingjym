@@ -1,0 +1,25 @@
+{
+  "name": "wedding-app",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Wedding App Mobile-First — Joa & Maga (07.11.2026)",
+  "packageManager": "pnpm@12.16.1",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "scripts": {
+    "dev": "pnpm --parallel --filter @wedding/api --filter @wedding/web dev",
+    "build": "pnpm --filter @wedding/shared build && pnpm --filter @wedding/web build && pnpm --filter @wedding/api build",
+    "typecheck": "pnpm -r typecheck",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "db:generate": "pnpm --filter @wedding/api db:generate",
+    "db:migrate": "pnpm --filter @wedding/api db:migrate",
+    "db:studio": "pnpm --filter @wedding/api db:studio"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.10",
+    "typescript": "^5.8.2",
+    "vitest": "^3.0.8"
+  }
+}

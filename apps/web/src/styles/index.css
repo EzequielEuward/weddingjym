@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+:root {
+  /* Paleta Oficial Invitación Joa & Maga */
+  --bg: #f4efe7;
+  --paper: #fbf8f3;
+  --ink: #2f2b27;
+  --muted: #776f66;
+  --line: #d9cfc2;
+  --accent: #7a6b5a;
+  --white: #ffffff;
+
+  /* Semánticos de Interacción de la App */
+  --vote: #c94a4a;
+  --success: #3f6b4e;
+  --danger: #b43c3c;
+}
+
+@theme {
+  --font-serif: "Cormorant Garamond", Georgia, serif;
+  --font-sans: "Montserrat", Arial, sans-serif;
+
+  --color-canvas: var(--bg);
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-vote: var(--vote);
+  --color-success: var(--success);
+  --color-danger: var(--danger);
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    line-height: 1.55;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    background-color: var(--bg);
+    color: var(--ink);
+  }
+
+  /* Evita auto-zoom en iOS Safari al enfocar inputs */
+  input,
+  textarea,
+  select {
+    font-size: 16px;
+  }
+}

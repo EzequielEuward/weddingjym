@@ -1,0 +1,26 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build outputs
+dist/
+build/
+*.tsbuildinfo
+
+# Environment & Secrets (NEVER COMMIT)
+.env
+.env.*
+!.env.example
+
+# Local runtime data (photos & local databases)
+data/
+backups/
+uploads/
+*.sqlite
+*.db
+
+# Logs & OS
+logs/
+*.log
+.DS_Store
+Thumbs.db
